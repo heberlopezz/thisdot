@@ -1,7 +1,9 @@
 import {
+  AfterViewInit,
   Component,
-  OnInit
+  ViewChild
 } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 
 import { User } from '../../interfaces/user.interface';
 import { GithubService } from '../../services/github.service';
@@ -11,15 +13,21 @@ import { GithubService } from '../../services/github.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements AfterViewInit {
   users: User[];
+  total = 0;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private githubService: GithubService) {}
 
-  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    this.paginator.page.subscribe((data) => console.log(data));
+    this.getUsers();
+  }
 
-  getUsers(search: string = ''): void {
-    this.githubService
-      .search(search)
-      .subscribe((response) => (this.users = response.items));
+  getUsers(search: string = 'thisdot'): void {
+    this.githubService.search(search).subscribe((response) => {
+      this.users = response.items;
+      this.total = response.totalCount;
+    });
   }
 }

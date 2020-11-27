@@ -4,6 +4,7 @@
     <input matInput #search (keyup)="getUsers(search.value)" />
   </mat-form-field>
 </form>
-<div class="results" *ngIf="users?.length">
+<mat-paginator class="full-width" [length]="total" [pageSize]="30"></mat-paginator>
+<div class="results">
   <app-profile-card *ngFor="let user of users" [user]="user"></app-profile-card>
 </div>

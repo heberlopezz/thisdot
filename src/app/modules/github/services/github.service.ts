@@ -28,11 +28,12 @@ export class GithubService {
       })
       .pipe(
         map((response) => {
-          const res = {
-            ...response,
+          const responseInCamelCase = keysToCamel(response) as Response<User>;
+          const data: Response<User> = {
+            totalCount: responseInCamelCase.totalCount,
             items: response.items.map((item) => keysToCamel(item) as User),
           };
-          return res;
+          return data;
         })
       );
   }
