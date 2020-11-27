@@ -1,1 +1,9 @@
-<p>search works!</p>
+<form class="form">
+  <mat-form-field class="full-width">
+    <mat-label>Search</mat-label>
+    <input matInput #search (keyup)="getUsers(search.value)" />
+  </mat-form-field>
+</form>
+<div class="results" *ngIf="users?.length">
+  <app-profile-card *ngFor="let user of users" [user]="user"></app-profile-card>
+</div>
