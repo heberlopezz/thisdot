@@ -10,6 +10,13 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('../github/github.module').then((m) => m.GithubModule),
+      },
+    ],
   },
 ];
 
