@@ -1,10 +1,14 @@
 <form class="form">
   <mat-form-field class="full-width">
     <mat-label>Search</mat-label>
-    <input matInput #search (keyup)="getUsers(search.value)" />
+    <input matInput [(ngModel)]="search" name="search" (keyup)="getUsers()" />
   </mat-form-field>
 </form>
-<mat-paginator class="full-width" [length]="total" [pageSize]="30"></mat-paginator>
+<mat-paginator
+  class="full-width"
+  [length]="total"
+  [pageSize]="30"
+></mat-paginator>
 <div class="results">
   <app-profile-card *ngFor="let user of users" [user]="user"></app-profile-card>
 </div>

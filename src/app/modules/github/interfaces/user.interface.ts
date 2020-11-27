@@ -3,4 +3,5 @@ export interface User {
   id: number;
   avatarUrl: string;
   url: string;
+  htmlUrl: string;
 }

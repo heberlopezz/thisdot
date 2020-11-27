@@ -21,3 +21,12 @@ body {
 .full-width {
   width: 100%;
 }
+
+a,
+a:active,
+a:focus,
+a:hover,
+a:visited {
+  text-decoration: none;
+  color: initial;
+}

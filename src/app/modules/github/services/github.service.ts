@@ -20,8 +20,10 @@ export class GithubService {
 
   constructor(private httpClient: HttpClient) {}
 
-  search(param: string): Observable<Response<User>> {
-    const params = new HttpParams().set('q', param);
+  search(param: string, page: number): Observable<Response<User>> {
+    const params = new HttpParams()
+      .set('q', param)
+      .set('page', page.toString());
     return this.httpClient
       .get<Response<User>>(this.uriApi + '/search/users', {
         params,

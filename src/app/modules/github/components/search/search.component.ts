@@ -16,16 +16,22 @@ import { GithubService } from '../../services/github.service';
 export class SearchComponent implements AfterViewInit {
   users: User[];
   total = 0;
+  search = 'thisdot';
+  page = 1;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private githubService: GithubService) {}
 
   ngAfterViewInit(): void {
-    this.paginator.page.subscribe((data) => console.log(data));
+    this.paginator.page.subscribe((data) => {
+      console.log(data);
+      this.page = data.pageIndex + 1;
+      this.getUsers();
+    });
     this.getUsers();
   }
 
-  getUsers(search: string = 'thisdot'): void {
-    this.githubService.search(search).subscribe((response) => {
+  getUsers(): void {
+    this.githubService.search(this.search, this.page).subscribe((response) => {
       this.users = response.items;
       this.total = response.totalCount;
     });
