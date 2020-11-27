@@ -26,7 +26,7 @@ export class SearchComponent implements AfterViewInit {
   searchParamChanged: Subject<string> = new Subject<string>();
   page = 1;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
+
   constructor(private githubService: GithubService) {
     this.searchParamChanged
       .pipe(debounceTime(500), distinctUntilChanged())
