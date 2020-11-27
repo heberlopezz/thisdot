@@ -4,16 +4,17 @@ import {
   Routes
 } from '@angular/router';
 
+import { SearchComponent } from './components/search/search.component';
+
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./modules/layout/layout.module').then((m) => m.LayoutModule),
+    component: SearchComponent,
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class GithubRoutingModule {}
